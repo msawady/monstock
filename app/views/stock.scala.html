@@ -1,0 +1,48 @@
+@import services.domain.Stock
+@this(webJarsUtil: org.webjars.play.WebJarsUtil)
+@(stock_list: List[Stock])
+
+
+<head>
+    <title>stockList</title>
+    @Html(webJarsUtil.css("bootstrap.min.css"))
+    @Html(webJarsUtil.css("jquery.dataTables.min.css"))
+    @Html(webJarsUtil.css("dataTables.bootstrap4.min.css"))
+    @Html(webJarsUtil.script("jquery.min.js"))
+    @Html(webJarsUtil.script("tether.min.js"))
+    @Html(webJarsUtil.script("bootstrap.min.js"))
+    @Html(webJarsUtil.script("jquery.dataTables.min.js"))
+    @Html(webJarsUtil.script("dataTables.bootstrap4.min.js"))
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/context.bootstrap.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/stock.css")">
+    <script src="@routes.Assets.versioned("javascripts/context.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.versioned("javascripts/stock.js")" type="text/javascript"></script>
+</head>
+
+<h1>Stock List</h1>
+
+<div class="table-area">
+    <table class="table table-clickable table-hover" id="stockTable">
+        <thead class="thead-inverse">
+        <tr>
+            <th>#</th>
+            <th>CODE</th>
+            <th>NAME</th>
+            <th>MARKET</th>
+            <th>INDUSTRY</th>
+            <th>TRADING_UNIT</th>
+        </tr>
+        <tbody id="stockBody">
+        @for(stock <- stock_list) {
+        <tr>
+            <td><input type="checkbox"/></td>
+            <td class="code">@stock.code</td>
+            <td class="name">@stock.name</td>
+            <td class="market">@stock.market</td>
+            <td class="industry">@stock.industryType</td>
+            <td class="unit">@stock.unit</td>
+        </tr>
+        }
+        </tbody>
+   </table>
+</div>
