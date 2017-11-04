@@ -1,24 +1,20 @@
 package services.repository
 
-import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
-import javax.inject.{Inject, Singleton}
+import javax.inject.Singleton
 
 import org.mongodb.scala.{MongoClient, MongoCollection}
 import play.Environment
-import play.libs.ws.WSClient
 import services.domain.Stock
 import services.repository.Helpers._
 
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration
 import scala.io.Source
 
 /**
   * Created by masaa on 2017/10/09.
   */
 @Singleton
-class StockRepository @Inject()(ws: WSClient) {
+class StockRepository {
 
   val mongoClient = MongoClient()
   val database = mongoClient.getDatabase("monstock").withCodecRegistry(Stock.codecRegistry)
@@ -35,7 +31,6 @@ class StockRepository @Inject()(ws: WSClient) {
       return
     }
 
-
     val collection: MongoCollection[Stock] = database.getCollection("stock")
     collection.drop().results()
 
@@ -45,7 +40,6 @@ class StockRepository @Inject()(ws: WSClient) {
 
     collection.insertMany(stocks).results()
     this.initialized.set(true)
-
   }
 
   def getStockList(): List[Stock] = {

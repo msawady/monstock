@@ -31,6 +31,7 @@
             <th>MARKET</th>
             <th>INDUSTRY</th>
             <th>TRADING_UNIT</th>
+            <th>NK_225</th>
         </tr>
         <tbody id="stockBody">
         @for(stock <- stock_list) {
@@ -41,6 +42,7 @@
             <td class="market">@stock.market</td>
             <td class="industry">@stock.industryType</td>
             <td class="unit">@stock.unit</td>
+            <td class="unit">@stock.isNK225</td>
         </tr>
         }
         </tbody>

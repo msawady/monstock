@@ -9,7 +9,9 @@ import org.bson.codecs.configuration.CodecRegistries.{fromRegistries, fromProvid
 case class Stock(_id: ObjectId, code: String, name: String, market: String, industryType: String, unit: Int, isNK225: Boolean)
 
 object Stock {
-  def apply(code: String, name: String, market: String, industryType: String, unit: Int, isNK225: Boolean): Stock = new Stock(new ObjectId, code, name, market, industryType, unit, isNK225)
-  implicit val codecRegistry = fromRegistries(fromProviders(classOf[Stock]), DEFAULT_CODEC_REGISTRY)
+  def apply(code: String, name: String, market: String, industryType: String, unit: Int, isNK225: Boolean): Stock
+  = new Stock(new ObjectId, code, name, market, industryType, unit, isNK225)
+
+  val codecRegistry = fromRegistries(fromProviders(classOf[Stock]), DEFAULT_CODEC_REGISTRY)
 }
 
